@@ -13,7 +13,14 @@ func (g *Game) Score() int {
 	for i, n := range g.rolls {
 		sum += n
 
-		if i >= 2 && (i%2 == 0) && (g.rolls[i-2]+g.rolls[i-1] == 10) {
+		if i >= 1 && g.rolls[i-1] == 10 {
+			// Previous Frame was a Strike
+			sum += n
+		} else if i >= 2 && g.rolls[i-2] == 10 {
+			// Previous Frame was a Strike
+			sum += n
+		} else if i >= 2 && (i%2 == 0) && (g.rolls[i-2]+g.rolls[i-1] == 10) {
+			// Previous Frame was a Spare
 			sum += n
 		}
 	}
